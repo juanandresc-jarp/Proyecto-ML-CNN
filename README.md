@@ -15,4 +15,4 @@ Para la carga de datos se tenían que tener en cuenta algunas cosas, las imagene
 5. Se crean las subcarpetas correspondientes y se mueven las imagenes.  
 * Con las subcarpetas y las imagenes separadas respectivamente se separaron en tres subcarpetas más en cada una, datos de train, validation y test, teniendo una proporción de 70% para train, y 15% tanto para validation como test.
 ##### Etiquetado
-El etiquetado de los datos se lleva a cabo
+El etiquetado de los datos se lleva a cabo con las carpetas creadas previamente, para ello

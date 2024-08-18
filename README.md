@@ -51,3 +51,29 @@ Para el entrenamiento, se considerarán distintas arquitecturas de CNN que se aj
 - Modificación de Capas y Filtros: Se realizaron varios experimentos ajustando el número de filtros y capas. Inicialmente, se redujeron los filtros a la mitad y se agregó una nueva capa de 64 filtros. Luego, se incrementó a 128 filtros, pero al observar un deterioro en las métricas, se optó por mantener un máximo de 64 filtros. Finalmente, se decidió poner todas las capas a 64 filtros y aumentar el tamaño del kernel, reduciendo una capa de max pooling para mejorar los resultados.
   
 - Arquitectura Final: Con base en estos experimentos, se decidió adoptar la arquitectura que mostró el mejor desempeño, analizando los resultados con la nueva métrica de recall.
+
+## Justificacion de herramientas
+
+- **Optimizador Adam**: Se utilizó por su eficiencia y efectividad en el ajuste de la tasa de aprendizaje de manera adaptativa.
+
+- **Función de Pérdida**: La entropía cruzada categórica se empleó debido a la naturaleza de clasificación multiclase del problema.
+
+- **Métricas de Evaluación**: Precisión y recall fueron monitorizadas para evaluar el rendimiento del modelo tanto en la identificación correcta de las clases como en la minimización de falsos negativos, crucial en aplicaciones médicas.
+
+- **Early Stopping**: Se configuró para detener el entrenamiento si la precisión de validación no mejora tras varias épocas, ajustando el modelo para obtener los mejores pesos posibles sin inclinarse al sobreajuste.
+
+- **Precisión (Accuracy)**: Refleja la capacidad general del modelo para clasificar correctamente las imágenes en todas las categorías. A lo largo de las pruebas, se observaron variaciones significativas en la precisión entre el conjunto de entrenamiento y de validación, lo que inicialmente sugirió la posibilidad de sobreajuste. La precisión alcanzó picos de perfección en el entrenamiento, lo que no se replicó en las pruebas, indicando que el modelo estaba memorizando los datos de entrenamiento en lugar de aprender características generalizables.
+
+- **Recall**: Esta métrica es de particular importancia en aplicaciones médicas debido a las consecuencias potencialmente graves de los falsos negativos. El recall experimentó mejoras significativas a medida que se ajustaba el modelo, especialmente después de la implementación de técnicas de regularización como el dropout, que ayudaron a mejorar la sensibilidad del modelo ante las clases minoritarias.
+
+## Implicaciones de los Resultados
+
+La variabilidad en precisión y recall a lo largo de las pruebas enfatiza la importancia de equilibrar complejidad del modelo y capacidad de generalización. Los experimentos demostraron que una arquitectura más compleja no necesariamente se traduce en mejor rendimiento, especialmente en un contexto donde el equilibrio entre sensibilidad y especificidad es crucial.
+
+## Áreas para Mejoras Futuras:
+
+- **Exploración de Arquitecturas Más Profundas y Complejas**: Dado que ajustes incrementales en la profundidad y los filtros ofrecieron mejoras, explorar arquitecturas más profundas podría permitir al modelo capturar características más sutiles y complejas de las imágenes.
+
+- **Expansión del Conjunto de Datos**: Integrar más datos, posiblemente de múltiples fuentes, podría ayudar a mejorar la robustez del modelo. Además, la inclusión de datos anotados por expertos de diversas geografías y demografías puede enriquecer el conjunto de entrenamiento y validación.
+
+- **Innovación en Técnicas de Regularización**: Experimentar con nuevas técnicas de regularización más allá del dropout, como la normalización por lotes o capas de normalización de pesos, podría ofrecer nuevas vías para controlar el sobreajuste y mejorar la generalización.
